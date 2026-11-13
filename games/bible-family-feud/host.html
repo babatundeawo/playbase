@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Host Answer View — Bible Family Feud</title>
+<meta name="description" content="Private host answer key for Bible Family Feud. Syncs live with the main game window." />
+<meta name="robots" content="noindex" />
+<meta name="theme-color" content="#0b1024" />
+<meta name="color-scheme" content="dark" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'" />
+<link rel="canonical" href="https://rccgkd.github.io/bible-family-feud/host.html" />
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="assets/favicon.ico" sizes="48x48" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/host.css" />
+</head>
+<body class="host-body">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<main id="main" class="host-page" tabindex="-1">
+  <header class="host-header">
+    <div>
+      <h1>Host Answer View</h1>
+      <p id="sync-status" class="sync-status" role="status">Waiting for the game to start on the main screen&hellip;</p>
+    </div>
+    <button id="btn-print" class="btn btn--outline" type="button">Print Tonight's Sheet</button>
+  </header>
+
+  <section id="host-current" class="host-current" aria-live="polite">
+    <p class="host-empty">Nothing live yet. Start the game on your main screen/tab, and this page will sync automatically.</p>
+  </section>
+
+  <section class="host-scoreboard" id="host-scoreboard" aria-label="Scores"></section>
+
+  <section class="host-upcoming">
+    <h2>Tonight's Full Round Sequence</h2>
+    <p class="host-upcoming-note">Generated the moment a game starts, in the exact shuffled order that will be played &mdash; handy to print as a backup.</p>
+    <ol id="host-round-list"></ol>
+  </section>
+</main>
+
+<script src="js/host.js"></script>
+<script src="js/register-sw.js"></script>
+</body>
+</html>

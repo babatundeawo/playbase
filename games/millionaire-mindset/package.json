@@ -1,0 +1,28 @@
+{
+  "name": "millionaire-mindset",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "homepage": "https://babatundeawo.github.io/Millionaire-Mindset/",
+  "description": "A free 15-question trivia climb to ₦1,000,000, built as an installable web app.",
+  "engines": { "node": ">=22.18" },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "contrast": "node scripts/contrast.mjs",
+    "preview": "node scripts/preview.mjs 4173 /Millionaire-Mindset/",
+    "test": "node --test \"tests/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^6.0.3",
+    "@types/node": "^26.6.6"
+  }
+}

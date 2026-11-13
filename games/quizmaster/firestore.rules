@@ -1,0 +1,148 @@
+// QuizMaster Firestore Security Rules
+// Published in the Firebase console: Firestore database > Rules > Publish.
+// Everything not listed here is denied by default.
+// Keep the numbers in the "scores" rule (5 and 10) in step with
+// MIN_QUESTIONS_FOR_LEADERBOARD and MAX_QUESTIONS in js/app.js.
+// Keep the board name patterns in validBoardId() in step with getBoardId() in js/periods.js.
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function validName(name) {
+      return name is string && name.size() >= 2 && name.size() <= 15;
+    }
+
+    // Board names: weekly-2026-10-25 (the Sunday that starts the week),
+    // monthly-2026-10, yearly-2026 and lifetime.
+    function validBoardId(id) {
+      return id.matches('^weekly-[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        || id.matches('^monthly-[0-9]{4}-[0-9]{2}$')
+        || id.matches('^yearly-[0-9]{4}$')
+        || id == 'lifetime';
+    }
+
+    function scorePath(scoreId) {
+      return /databases/$(database)/documents/scores/$(scoreId);
+    }
+
+    // True when scoreId names a game that is being saved in this very write
+    // (it does not exist yet, but will afterwards) and belongs to the signed-in player.
+    function isNewOwnScore(scoreId) {
+      return scoreId is string
+        && scoreId.matches('^[A-Za-z0-9]{20}$')
+        && !exists(scorePath(scoreId))
+        && getAfter(scorePath(scoreId)).data.uid == request.auth.uid;
+    }
+
+    // The fields every leaderboard total must have, and nothing else.
+    function validTotalShape(data, playerId) {
+      return data.keys().hasOnly(['uid', 'name', 'points', 'games', 'lastScoreId', 'updatedAt'])
+        && data.keys().hasAll(['uid', 'name', 'points', 'games', 'lastScoreId', 'updatedAt'])
+        && data.uid == playerId
+        && validName(data.name)
+        && data.points is number
+        && data.games is number
+        && data.updatedAt == request.time;
+    }
+
+    // ----- Quiz questions -----
+    match /questions/{questionId} {
+      allow read: if true;
+
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(
+             ['category', 'difficulty', 'question', 'options', 'answer', 'createdBy'])
+        && request.resource.data.createdBy == request.auth.uid
+        && request.resource.data.category is string
+        && request.resource.data.category.size() > 0
+        && request.resource.data.category.size() <= 30
+        && request.resource.data.question is string
+        && request.resource.data.question.size() > 0
+        && request.resource.data.question.size() <= 200
+        && request.resource.data.difficulty in ['easy', 'medium', 'hard']
+        && request.resource.data.options is list
+        && request.resource.data.options.size() == 4
+        && request.resource.data.answer is number
+        && request.resource.data.answer >= 0
+        && request.resource.data.answer <= 3;
+
+      allow update: if false;
+      allow delete: if signedIn() && resource.data.createdBy == request.auth.uid;
+    }
+
+    // ----- Player profiles -----
+    match /players/{playerId} {
+      allow read: if signedIn() && request.auth.uid == playerId;
+
+      allow create, update: if signedIn()
+        && request.auth.uid == playerId
+        && request.resource.data.keys().hasOnly(['name', 'gamesPlayed', 'bestPercent'])
+        && validName(request.resource.data.name)
+        && request.resource.data.gamesPlayed is number
+        && request.resource.data.gamesPlayed >= 0
+        && request.resource.data.bestPercent is number
+        && request.resource.data.bestPercent >= 0
+        && request.resource.data.bestPercent <= 100;
+
+      allow delete: if false;
+    }
+
+    // ----- Game records -----
+    match /scores/{scoreId} {
+      allow read: if signedIn();
+
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(
+             ['uid', 'name', 'points', 'correct', 'total', 'difficulty', 'category', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && validName(request.resource.data.name)
+        && request.resource.data.total is number
+        && request.resource.data.total >= 5
+        && request.resource.data.total <= 10
+        && request.resource.data.correct is number
+        && request.resource.data.correct >= 0
+        && request.resource.data.correct <= request.resource.data.total
+        && request.resource.data.points == request.resource.data.correct * 10
+        && request.resource.data.difficulty in ['easy', 'medium', 'hard', 'mixed']
+        && request.resource.data.category is string
+        && request.resource.data.category.size() > 0
+        && request.resource.data.category.size() <= 30
+        && request.resource.data.createdAt == request.time;
+
+      allow update, delete: if false;
+    }
+
+    // ----- Leaderboard totals: weekly, monthly, yearly and lifetime -----
+    // One document per player per board. A total can only grow, and only by the
+    // points of a game that is saved in the same write (see saveScoreToCloud
+    // in js/firebase-config.js), so nobody can type in a score of their own.
+    match /boards/{boardId}/players/{playerId} {
+      allow read: if signedIn();
+
+      allow create: if signedIn()
+        && validBoardId(boardId)
+        && request.auth.uid == playerId
+        && validTotalShape(request.resource.data, playerId)
+        && isNewOwnScore(request.resource.data.lastScoreId)
+        && request.resource.data.points == getAfter(scorePath(request.resource.data.lastScoreId)).data.points
+        && request.resource.data.games == 1;
+
+      allow update: if signedIn()
+        && validBoardId(boardId)
+        && request.auth.uid == playerId
+        && validTotalShape(request.resource.data, playerId)
+        && isNewOwnScore(request.resource.data.lastScoreId)
+        && request.resource.data.points
+             == resource.data.points + getAfter(scorePath(request.resource.data.lastScoreId)).data.points
+        && request.resource.data.games == resource.data.games + 1;
+
+      allow delete: if false;
+    }
+  }
+}

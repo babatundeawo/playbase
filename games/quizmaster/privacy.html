@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Privacy | QuizMaster</title>
+  <meta name="description" content="A plain-language summary of what QuizMaster stores, where, and why.">
+  <link rel="canonical" href="__SITE_URL__privacy.html">
+  <meta name="theme-color" content="#f6f6fb">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/images/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/images/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/images/icons/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5V5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="./" aria-label="QuizMaster home">
+        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5b4bff"/>
+              <stop offset="1" stop-color="#8a3cff"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="11" fill="url(#logo-gradient)"/>
+          <circle cx="19" cy="18.5" r="8" fill="none" stroke="#ffffff" stroke-width="3.6"/>
+          <path d="M23.5 23.5l6 6" stroke="#ffb020" stroke-width="3.6" stroke-linecap="round"/>
+        </svg>
+        <span class="brand__name">QuizMaster</span>
+      </a>
+      <div class="header-actions">
+        <button type="button" class="icon-btn theme-toggle" id="theme-toggle">
+          <svg class="icon icon-moon" aria-hidden="true" focusable="false"><use href="#i-moon"></use></svg>
+          <svg class="icon icon-sun" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <article class="prose">
+      <h1>Privacy</h1>
+      <p>This page explains in plain language what QuizMaster stores and why. It is a summary of how the app works, not a legal document.</p>
+
+      <h2>What is stored online</h2>
+      <ul>
+        <li><strong>A sign-in identifier.</strong> Guest players get a random ID. Players who use Google sign-in get an ID linked to their Google account. QuizMaster does not read or store your email address, real name or photo.</li>
+        <li><strong>Your nickname</strong> and your stats: games played and best score.</li>
+        <li><strong>Leaderboard scores:</strong> your nickname, points, difficulty level, topic and the time the game was finished.</li>
+        <li><strong>Questions you create,</strong> together with your sign-in ID, so that only you can delete them.</li>
+      </ul>
+
+      <h2>Who can see it</h2>
+      <ul>
+        <li>The leaderboard shows nickname, points, level and topic to signed-in players.</li>
+        <li>Questions you create can be played by everyone.</li>
+        <li>Your sign-in ID and stats are not shown to other players.</li>
+      </ul>
+
+      <h2>Please use a nickname</h2>
+      <p>Choose a nickname that does not include your real name, school, address or contact details.</p>
+
+      <h2>What is kept on your device</h2>
+      <ul>
+        <li>Your light or dark theme choice and a copy of your best score.</li>
+        <li>Your sign-in session, so you stay signed in.</li>
+        <li>A saved copy of the app, so it can open without internet.</li>
+      </ul>
+      <p>QuizMaster does not use advertising or tracking cookies, and it does not use analytics. The typefaces are served from the game's own web address, so no font company sees your visit.</p>
+
+      <h2>Services that process data</h2>
+      <ul>
+        <li><strong>Google Firebase</strong> (Authentication and Firestore) stores the online data listed above. If you choose Google sign-in, Google also handles that sign-in.</li>
+        <li><strong>GitHub Pages</strong> hosts the website and, like any web host, can see standard connection details such as your IP address when you open it.</li>
+      </ul>
+
+      <h2>Removing your data</h2>
+      <p>To ask for a nickname, score or question to be removed, contact the site owner through the project page: <a href="__REPO_URL__" rel="noopener noreferrer">__REPO_URL__</a>.</p>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>QuizMaster. Built with Techbase.</p>
+      <p><a href="privacy.html">Privacy</a></p>
+    </div>
+  </footer>
+
+  <div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
+  <script type="module" src="js/static-page.js"></script>
+</body>
+</html>

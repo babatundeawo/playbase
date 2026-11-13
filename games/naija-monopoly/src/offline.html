@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-NG">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>You are offline — Naija Monopoly</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta name="color-scheme" content="light dark">
+<style>
+  :root{ --bg:#f6f4ec; --text:#0e1a13; --muted:#4d5a52; --green:#008751; --on-green:#fff; --border:#dcd7c6; }
+  @media (prefers-color-scheme: dark){ :root{ --bg:#060e09; --text:#eef5f0; --muted:#9bb0a3; --green:#1fc27f; --on-green:#03140b; --border:#213a2b; } }
+  *{ box-sizing:border-box; }
+  body{ margin:0; min-height:100vh; min-height:100dvh; display:grid; place-items:center; padding:max(24px, env(safe-area-inset-top)) 24px max(24px, env(safe-area-inset-bottom)); background:var(--bg); color:var(--text); font:16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; text-align:center; }
+  main{ max-width:30rem; }
+  svg{ width:84px; height:84px; margin-bottom:20px; }
+  h1{ font-size:clamp(1.6rem, 1.2rem + 2vw, 2.25rem); line-height:1.15; letter-spacing:-0.02em; margin:0 0 12px; }
+  p{ color:var(--muted); margin:0 0 24px; }
+  a{ display:inline-flex; align-items:center; justify-content:center; min-height:52px; padding:0 28px; border-radius:16px; background:var(--green); color:var(--on-green); font-weight:700; text-decoration:none; }
+  a:focus-visible{ outline:3px solid var(--text); outline-offset:3px; }
+</style>
+</head>
+<body>
+<main id="main">
+  <svg viewBox="0 0 36 36" role="img" aria-label="Naija Monopoly logo"><rect width="36" height="36" rx="10" fill="#008751"/><path d="M9 27V11l15 16V11" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="29.5" cy="8.5" r="2.6" fill="#e8b93e"/></svg>
+  <h1>No network, no wahala.</h1>
+  <p>This page needs a connection, but the game itself is saved on your device. Open Naija Monopoly again and your game continues where you left it.</p>
+  <a href="%BASE_PATH%/">Open Naija Monopoly</a>
+</main>
+</body>
+</html>

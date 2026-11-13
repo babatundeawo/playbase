@@ -1,0 +1,77 @@
+# Builds the hub and every game, then publishes them as one site on GitHub Pages.
+#  - Pull requests: build and check only. Nothing goes live, and a downloadable copy is attached to the run.
+#  - Pushes to main and manual runs: build, check and publish.
+# One-time setting: Settings > Pages > Source > "GitHub Actions" (see docs/DEPLOYMENT.md).
+name: Build and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  build:
+    name: Build and check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Read GitHub Pages settings
+        id: pages
+        if: github.event_name != 'pull_request'
+        uses: actions/configure-pages@v6
+
+      # Pull requests use placeholder Firebase values, so real secrets never reach unmerged code.
+      - name: Build the site
+        env:
+          SITE_URL: ${{ steps.pages.outputs.base_url }}/
+          FIREBASE_API_KEY: ${{ secrets.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ secrets.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ secrets.FIREBASE_PROJECT_ID }}
+          FIREBASE_STORAGE_BUCKET: ${{ secrets.FIREBASE_STORAGE_BUCKET }}
+          FIREBASE_MESSAGING_SENDER_ID: ${{ secrets.FIREBASE_MESSAGING_SENDER_ID }}
+          FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+        run: node scripts/build.mjs ${{ github.event_name == 'pull_request' && '--preview --site https://example.github.io/playbase/' || '' }}
+
+      - name: Upload the site for publishing
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist
+
+      - name: Attach a downloadable copy (pull requests)
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v7
+        with:
+          name: site-preview
+          path: dist
+          retention-days: 7
+
+  deploy:
+    name: Publish
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

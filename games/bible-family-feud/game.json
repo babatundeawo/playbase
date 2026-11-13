@@ -1,0 +1,34 @@
+{
+  "id": "bible-family-feud",
+  "title": "Bible Family Feud",
+  "tagline": "A stage-ready Family Feud for church events.",
+  "description": "Two teams take turns guessing the most popular answers to Bible questions while a host flips tiles, calls strikes and runs the show from a single screen. Built for the Parent Sunday Variety Service. Nothing to install, no account and no server.",
+  "category": "Party game",
+  "tags": [
+    "Bible",
+    "Team game",
+    "Host-led",
+    "Offline"
+  ],
+  "players": "2 teams with a host",
+  "features": [
+    "60 original Bible questions, each with eight ranked answers",
+    "Automatic strike, steal and pot-banking rules",
+    "Private Host Answer View in a second window",
+    "Music and sound effects, keyboard shortcuts, works offline"
+  ],
+  "accent": "#f2b632",
+  "cover": "docs/assets/preview-game.webp",
+  "source": "https://github.com/rccgkd/bible-family-feud",
+  "build": {
+    "install": "npm install --no-audit --no-fund --ignore-scripts",
+    "command": "node scripts/build.mjs",
+    "output": "dist",
+    "env": {
+      "SITE_URL": "{siteNoSlash}"
+    },
+    "checks": [
+      "node scripts/check.mjs"
+    ]
+  }
+}

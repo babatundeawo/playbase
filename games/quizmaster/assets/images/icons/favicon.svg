@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="128" height="128" role="img" aria-label="QuizMaster logo">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5b4bff"/>
+      <stop offset="1" stop-color="#8a3cff"/>
+    </linearGradient>
+  </defs>
+  <rect width="40" height="40" rx="11" fill="url(#g)"/>
+  <circle cx="19" cy="18.5" r="8" fill="none" stroke="#ffffff" stroke-width="3.6"/>
+  <path d="M23.5 23.5l6 6" stroke="#ffb020" stroke-width="3.6" stroke-linecap="round"/>
+</svg>

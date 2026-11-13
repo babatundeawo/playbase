@@ -1,0 +1,60 @@
+{
+  "id": "./",
+  "name": "QuizMaster",
+  "short_name": "QuizMaster",
+  "description": "A quiz game with categories, difficulty levels, a timer and an online leaderboard.",
+  "lang": "en",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f6fb",
+  "theme_color": "#5b4bff",
+  "categories": [
+    "games",
+    "education"
+  ],
+  "icons": [
+    {
+      "src": "assets/images/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/images/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/images/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/images/screenshots/wide-landing.png",
+      "sizes": "1280x860",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "The QuizMaster start page"
+    },
+    {
+      "src": "assets/images/screenshots/narrow-setup.png",
+      "sizes": "780x1688",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Choosing a topic and difficulty"
+    },
+    {
+      "src": "assets/images/screenshots/narrow-quiz.png",
+      "sizes": "780x1688",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Answering a question against the clock"
+    }
+  ]
+}

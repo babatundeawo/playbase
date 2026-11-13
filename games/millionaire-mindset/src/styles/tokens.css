@@ -1,0 +1,146 @@
+/*
+  Design tokens. Every colour is OKLCH. light-dark() picks the first value in
+  light mode and the second in dark mode; `data-theme` on <html> (set before
+  first paint) overrides the system setting through `color-scheme`.
+
+  Contrast is verified by `npm run contrast`, which reads the "contrast" tokens
+  below. Edit a colour, run it, and it reports every text and background pair.
+*/
+
+:root {
+  color-scheme: light dark;
+}
+:root[data-theme='light'] {
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+:root {
+  /* contrast:start */
+  --bg: light-dark(oklch(0.975 0.012 90), oklch(0.155 0.032 268));
+  --surface: light-dark(oklch(0.995 0.005 90), oklch(0.205 0.036 268));
+  --surface-2: light-dark(oklch(0.945 0.016 90), oklch(0.255 0.04 268));
+  --line: light-dark(oklch(0.86 0.02 90), oklch(0.34 0.04 268));
+  --line-strong: light-dark(oklch(0.62 0.03 268), oklch(0.58 0.04 268));
+
+  --text: light-dark(oklch(0.22 0.04 268), oklch(0.965 0.008 95));
+  --text-2: light-dark(oklch(0.44 0.03 268), oklch(0.78 0.02 268));
+
+  --gold: light-dark(oklch(0.8 0.15 87), oklch(0.83 0.15 87));
+  --on-gold: oklch(0.2 0.04 268);
+  --gold-text: light-dark(oklch(0.47 0.11 75), oklch(0.84 0.14 87));
+
+  --accent: light-dark(oklch(0.45 0.17 258), oklch(0.76 0.13 258));
+  --accent-fill: light-dark(oklch(0.5 0.18 258), oklch(0.72 0.14 258));
+  --on-accent-fill: light-dark(oklch(0.99 0.005 258), oklch(0.16 0.03 268));
+
+  --ok: light-dark(oklch(0.42 0.12 155), oklch(0.8 0.17 155));
+  --ok-fill: light-dark(oklch(0.46 0.13 155), oklch(0.74 0.17 155));
+  --on-ok-fill: light-dark(oklch(0.99 0.005 155), oklch(0.16 0.03 268));
+
+  --bad: light-dark(oklch(0.5 0.19 25), oklch(0.76 0.15 25));
+  --bad-fill: light-dark(oklch(0.52 0.2 25), oklch(0.7 0.17 25));
+  --on-bad-fill: light-dark(oklch(0.99 0.005 25), oklch(0.16 0.03 268));
+  --focus: light-dark(oklch(0.5 0.18 258), oklch(0.83 0.15 87));
+  /* contrast:end */
+
+  --scrim: light-dark(oklch(0.2 0.04 268 / 0.55), oklch(0.08 0.03 268 / 0.72));
+
+  /* Tinted surfaces for states. */
+  --tint-accent: color-mix(in oklab, var(--accent-fill) 16%, var(--surface));
+  --tint-ok: color-mix(in oklab, var(--ok-fill) 16%, var(--surface));
+  --tint-bad: color-mix(in oklab, var(--bad-fill) 16%, var(--surface));
+  --tint-gold: color-mix(in oklab, var(--gold) 14%, var(--surface));
+
+  /* Type */
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --step--1: clamp(0.8rem, 0.78rem + 0.1vw, 0.875rem);
+  --step-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --step-1: clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --step-2: clamp(1.3rem, 1.15rem + 0.75vw, 1.7rem);
+  --step-3: clamp(1.7rem, 1.3rem + 2vw, 2.6rem);
+  --step-4: clamp(2.3rem, 1.4rem + 4.5vw, 4.4rem);
+  --step-5: clamp(2.9rem, 1.2rem + 8.5vw, 7rem);
+
+  /* Space */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+
+  /* Shape */
+  --r-1: 0.5rem;
+  --r-2: 0.875rem;
+  --r-3: 1.25rem;
+  --r-pill: 999px;
+  --bw: 1px;
+
+  /* Depth */
+  --shadow-1: 0 1px 2px light-dark(oklch(0.3 0.04 268 / 0.12), oklch(0 0 0 / 0.4));
+  --shadow-2: 0 8px 24px -8px light-dark(oklch(0.3 0.06 268 / 0.22), oklch(0 0 0 / 0.55));
+  --shadow-3: 0 24px 60px -20px light-dark(oklch(0.3 0.08 268 / 0.3), oklch(0 0 0 / 0.7));
+  --glow-gold: 0 0 0 1px color-mix(in oklab, var(--gold) 55%, transparent), 0 10px 36px -10px color-mix(in oklab, var(--gold) 55%, transparent);
+
+  /* Layers */
+  --z-bar: 20;
+  --z-toast: 60;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --t-fast: 140ms;
+  --t-med: 260ms;
+  --t-slow: 600ms;
+
+  /* Safe areas for notched phones */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+}
+
+/*
+  Fallback for older browsers that do not understand light-dark() or oklch():
+  the dark theme in plain hex. Generated with `node scripts/contrast.mjs --hex`.
+*/
+@supports not (color: light-dark(white, black)) {
+  :root {
+    color-scheme: dark;
+    --bg: #070b1a;
+    --surface: #101628;
+    --surface-2: #1a2236;
+    --line: #2f374d;
+    --line-strong: #707a93;
+    --text: #f5f3ee;
+    --text-2: #b2b7c5;
+    --gold: #f1c03f;
+    --on-gold: #0e1528;
+    --gold-text: #f2c451;
+    --accent: #7cb2ff;
+    --accent-fill: #6ba5fb;
+    --on-accent-fill: #080d1a;
+    --ok: #4add8c;
+    --ok-fill: #2ec97a;
+    --on-ok-fill: #080d1a;
+    --bad: #ff8880;
+    --bad-fill: #f66d67;
+    --on-bad-fill: #080d1a;
+    --focus: #f1c03f;
+    --scrim: rgba(5, 7, 16, 0.75);
+    --tint-accent: #1d2a45;
+    --tint-ok: #183036;
+    --tint-bad: #312533;
+    --tint-gold: #2a2c31;
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-2: 0 8px 24px -8px rgba(0, 0, 0, 0.55);
+    --shadow-3: 0 24px 60px -20px rgba(0, 0, 0, 0.7);
+    --glow-gold: 0 0 0 1px #8a6d20, 0 10px 36px -10px #8a6d20;
+  }
+}

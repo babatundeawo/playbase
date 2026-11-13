@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page not found | QuizMaster</title>
+  <meta name="description" content="This page could not be found.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="__SITE_URL__">
+  <meta name="theme-color" content="#f6f6fb">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="__SITE_URL__assets/images/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="__SITE_URL__assets/images/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="__SITE_URL__assets/images/icons/apple-touch-icon.png">
+  <link rel="preload" href="__SITE_URL__assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="__SITE_URL__css/fonts.css">
+  <link rel="stylesheet" href="__SITE_URL__css/tokens.css">
+  <link rel="stylesheet" href="__SITE_URL__css/style.css">
+  <script src="__SITE_URL__js/theme-init.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5V5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="__SITE_URL__" aria-label="QuizMaster home">
+        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5b4bff"/>
+              <stop offset="1" stop-color="#8a3cff"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="11" fill="url(#logo-gradient)"/>
+          <circle cx="19" cy="18.5" r="8" fill="none" stroke="#ffffff" stroke-width="3.6"/>
+          <path d="M23.5 23.5l6 6" stroke="#ffb020" stroke-width="3.6" stroke-linecap="round"/>
+        </svg>
+        <span class="brand__name">QuizMaster</span>
+      </a>
+      <div class="header-actions">
+        <button type="button" class="icon-btn theme-toggle" id="theme-toggle">
+          <svg class="icon icon-moon" aria-hidden="true" focusable="false"><use href="#i-moon"></use></svg>
+          <svg class="icon icon-sun" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <div class="not-found">
+      <p class="not-found__code text-gradient" aria-hidden="true">404</p>
+      <h1 class="screen__title">This page took a wrong turn</h1>
+      <p class="screen__lead">We could not find the page you asked for. Let's get you back to the quiz.</p>
+      <a class="btn btn--primary btn--lg" href="__SITE_URL__">Back to QuizMaster</a>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>QuizMaster. Built with Techbase.</p>
+      <p><a href="__SITE_URL__privacy.html">Privacy</a></p>
+    </div>
+  </footer>
+
+  <div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
+  <script type="module" src="__SITE_URL__js/static-page.js"></script>
+</body>
+</html>
