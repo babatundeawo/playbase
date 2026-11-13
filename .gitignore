@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist-ssr/
+.lighthouseci/
+*.log
+*.local
+.env
+.env.*
+.DS_Store
+Thumbs.db
+.vscode/

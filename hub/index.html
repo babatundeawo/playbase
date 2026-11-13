@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Playbase: free games to play together</title>
+  <meta name="description" content="Quiz nights, Bible trivia, Monopoly and more. Free games that run in your browser, with no account and nothing to install.">
+  <meta name="theme-color" content="#0C1233">
+  <meta name="color-scheme" content="dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="%SITE_URL%">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Playbase: free games to play together">
+  <meta property="og:description" content="Quiz nights, Bible trivia, Monopoly and more. Free games that run in your browser.">
+  <meta property="og:url" content="%SITE_URL%">
+  <link rel="preload" href="assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/hub.css">
+</head>
+<body>
+  <a class="skip" href="#rows">Skip to the games</a>
+
+  <header class="bar">
+    <a class="brand" href="./" aria-label="Playbase home">
+      <svg class="brand-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path d="M16 2.5 29.5 16 16 29.5 2.5 16Z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M13 10.5v11l9-5.5Z" fill="currentColor"/></svg>
+      <span>Playbase</span>
+    </a>
+    <label class="search">
+      <span class="sr">Search games</span>
+      <input id="q" type="search" placeholder="Search games" autocomplete="off" enterkeyhint="search">
+    </label>
+  </header>
+
+  <main>
+    <section id="hero" class="hero" aria-label="Featured game"></section>
+    <div id="rows"></div>
+    <p id="empty" class="empty" hidden>No game matches that search. Clear the search to see every game.</p>
+    <p id="error" class="empty" hidden>The games could not load. Check your connection and reload the page.</p>
+    <noscript>
+      <div class="plain">
+        <h2>All games</h2>
+        <ul>
+          <!--NOSCRIPT_LIST-->
+        </ul>
+      </div>
+    </noscript>
+  </main>
+
+  <footer class="foot">
+    <p>Free games that run in your browser. No account, nothing to install.</p>
+    <p>Made by <a href="https://github.com/babatundeawo">Babatunde Awoyemi</a></p>
+  </footer>
+
+  <dialog id="detail" aria-labelledby="detail-title"></dialog>
+
+  <script type="module" src="js/hub.js"></script>
+</body>
+</html>

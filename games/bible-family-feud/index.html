@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Bible Family Feud — Parent Sunday Variety Service</title>
+<meta name="description" content="A stage-ready Bible Family Feud game for church events. Name your teams, pick your rounds, and run the show from one screen — free, in the browser, no sign-up." />
+<meta name="theme-color" content="#0b1024" />
+<meta name="color-scheme" content="dark" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'" />
+<meta name="referrer" content="strict-origin-when-cross-origin" />
+<link rel="canonical" href="https://rccgkd.github.io/bible-family-feud/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Bible Family Feud" />
+<meta property="og:title" content="Bible Family Feud — Parent Sunday Variety Service" />
+<meta property="og:description" content="Run a Bible Family Feud on stage: 60 original rounds, two teams, live host answer view. Free and works offline." />
+<meta property="og:url" content="https://rccgkd.github.io/bible-family-feud/" />
+<meta property="og:image" content="https://rccgkd.github.io/bible-family-feud/assets/og-image.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Bible Family Feud game board with gold answer tiles on a dark stage" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="assets/favicon.ico" sizes="48x48" />
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+<link rel="manifest" href="manifest.webmanifest" />
+
+<link rel="stylesheet" href="css/style.css" />
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Bible Family Feud","description":"A Family Feud–style Bible quiz game for church events.","applicationCategory":"GameApplication","operatingSystem":"Any (modern web browser)","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"inLanguage":"en"}
+</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<noscript>
+  <p class="noscript">Bible Family Feud needs JavaScript to run the game board. Please enable JavaScript in your browser and reload this page.</p>
+</noscript>
+
+<main id="main" class="stage" tabindex="-1">
+
+  <!-- ============ TITLE SCREEN ============ -->
+  <section id="screen-title" class="screen screen--title is-active" aria-labelledby="title-heading">
+    <!-- Signature: a slowly turning rose window behind the title (decorative) -->
+    <svg class="rose" viewBox="-100 -100 200 200" aria-hidden="true" focusable="false">
+      <defs>
+        <path id="petal-l" d="M0 -34 C 12 -48 12 -68 0 -88 C -12 -68 -12 -48 0 -34 Z" />
+        <path id="petal-s" d="M0 -13 C 6 -19 6 -26 0 -32 C -6 -26 -6 -19 0 -13 Z" />
+      </defs>
+      <circle class="ring" r="95" />
+      <circle class="ring" r="91" />
+      <use href="#petal-l" class="pane-a" transform="rotate(0)" />
+      <use href="#petal-l" class="pane-b" transform="rotate(30)" />
+      <use href="#petal-l" class="pane-c" transform="rotate(60)" />
+      <use href="#petal-l" class="pane-d" transform="rotate(90)" />
+      <use href="#petal-l" class="pane-a" transform="rotate(120)" />
+      <use href="#petal-l" class="pane-b" transform="rotate(150)" />
+      <use href="#petal-l" class="pane-c" transform="rotate(180)" />
+      <use href="#petal-l" class="pane-d" transform="rotate(210)" />
+      <use href="#petal-l" class="pane-a" transform="rotate(240)" />
+      <use href="#petal-l" class="pane-b" transform="rotate(270)" />
+      <use href="#petal-l" class="pane-c" transform="rotate(300)" />
+      <use href="#petal-l" class="pane-d" transform="rotate(330)" />
+      <circle class="ring" r="34" />
+      <use href="#petal-s" class="pane-c" transform="rotate(15)" />
+      <use href="#petal-s" class="pane-a" transform="rotate(45)" />
+      <use href="#petal-s" class="pane-b" transform="rotate(75)" />
+      <use href="#petal-s" class="pane-c" transform="rotate(105)" />
+      <use href="#petal-s" class="pane-a" transform="rotate(135)" />
+      <use href="#petal-s" class="pane-b" transform="rotate(165)" />
+      <use href="#petal-s" class="pane-c" transform="rotate(195)" />
+      <use href="#petal-s" class="pane-a" transform="rotate(225)" />
+      <use href="#petal-s" class="pane-b" transform="rotate(255)" />
+      <use href="#petal-s" class="pane-c" transform="rotate(285)" />
+      <use href="#petal-s" class="pane-a" transform="rotate(315)" />
+      <use href="#petal-s" class="pane-b" transform="rotate(345)" />
+      <circle class="hub" r="6" />
+    </svg>
+
+    <div class="marquee">
+      <span class="eyebrow">Parent Sunday Variety Service</span>
+      <h1 id="title-heading" class="show-title">Bible Family <em>Feud</em></h1>
+      <p class="show-lede">Two teams. Eight answers. One board. Name your teams, choose how many rounds, and run the whole show from a single screen.</p>
+    </div>
+
+    <form id="team-form" class="card setup" autocomplete="off">
+      <div class="team-fields">
+        <div class="field field--a">
+          <label for="team-a-name">Team 1 name</label>
+          <input id="team-a-name" name="team-a" type="text" maxlength="24" value="Team Faith" />
+        </div>
+        <span class="vs" aria-hidden="true">VS</span>
+        <div class="field field--b">
+          <label for="team-b-name">Team 2 name</label>
+          <input id="team-b-name" name="team-b" type="text" maxlength="24" value="Team Grace" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="rounds-per-team">Questions per team</label>
+        <select id="rounds-per-team" name="rounds">
+          <option value="3">3 (6 rounds total)</option>
+          <option value="5" selected>5 (10 rounds total)</option>
+          <option value="7">7 (14 rounds total)</option>
+          <option value="10">10 (20 rounds total)</option>
+          <option value="15">15 (30 rounds total)</option>
+          <option value="20">20 (40 rounds total)</option>
+          <option value="30">30 (all 60 questions)</option>
+        </select>
+      </div>
+    </form>
+
+    <div class="card host-box">
+      <div>
+        <h2 class="card-title">Host Answer View</h2>
+        <p>Before you project this screen, open your private answer view in a second window on this same computer. It shows every answer live, synced automatically, without cluttering the board.</p>
+        <p class="fine">Pop-up blocked? Open <a href="host.html" target="_blank" rel="noopener">host.html</a> in a new tab instead. Press <kbd>H</kbd> any time during the game to reopen it.</p>
+      </div>
+      <button id="btn-open-host" class="btn btn--outline" type="button">
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+        Open Host Answer View
+      </button>
+    </div>
+
+    <div class="cta">
+      <button id="btn-start" class="btn btn--gold btn--lg" type="button">Continue <span aria-hidden="true">&rarr;</span></button>
+      <p class="fine">Questions are shuffled fresh every game. Best on a PC or large screen.</p>
+    </div>
+  </section>
+
+  <!-- ============ RULES SCREEN ============ -->
+  <section id="screen-rules" class="screen screen--rules" aria-labelledby="rules-heading" hidden>
+    <div class="marquee marquee--sm">
+      <span class="eyebrow">Before we begin</span>
+      <h1 id="rules-heading" class="show-title">How to Play</h1>
+    </div>
+
+    <ol class="rules-list">
+      <li><strong>Get ready.</strong> Before each team's turn, a full-screen announcement shows who's up next with a 3-second countdown, then play begins automatically.</li>
+      <li><strong>Call out an answer.</strong> If it's on the board, the host flips that numbered tile and its points go into the Round Pot.</li>
+      <li><strong>Three strikes.</strong> A wrong answer is a strike. After 3 strikes, the <strong>other team</strong> gets a "get ready" announcement of their own for a <strong>steal attempt</strong>.</li>
+      <li><strong>Steal or stay safe.</strong> The stealing team must clear the rest of the board before missing 3 times. If they do, they steal the whole pot. If they miss 3 times, the original team keeps it.</li>
+      <li><strong>Clear the board.</strong> If a team reveals all 8 answers without 3 strikes, the whole pot is automatically theirs.</li>
+      <li><strong>Highest score wins.</strong> After every round has been played, the team with the most total points wins the feud!</li>
+    </ol>
+
+    <button id="btn-rules-continue" class="btn btn--gold btn--lg" type="button">Let's Practice <span aria-hidden="true">&rarr;</span></button>
+  </section>
+
+  <!-- ============ ANNOUNCEMENT SCREEN ============ -->
+  <section id="screen-announce" class="screen screen--announce" aria-label="Next turn" hidden>
+    <div class="announce-card" id="announce-card" role="status" aria-live="assertive">
+      <p class="announce-context" id="announce-context">Round 1 of 10</p>
+      <h1 class="announce-team" id="announce-team">Team Faith</h1>
+      <p class="announce-sub" id="announce-sub">get ready!</p>
+      <div class="announce-count" id="announce-count" aria-hidden="true">3</div>
+    </div>
+  </section>
+
+  <!-- ============ GAME SCREEN ============ -->
+  <section id="screen-game" class="screen screen--game" aria-label="Game board" hidden>
+    <div id="practice-banner" class="banner banner--practice" hidden>
+      <span>Practice round &mdash; try the tiles and the strike button. This one is not scored.</span>
+    </div>
+    <div id="phase-banner" class="banner" role="status" hidden></div>
+
+    <header class="game-header">
+      <div class="round-pill">
+        <span id="round-label">Round 1</span>
+        <span id="round-progress" class="round-progress">1 / 7</span>
+      </div>
+      <div class="header-icons">
+        <button id="btn-open-host-2" class="icon-btn" type="button" title="Open or reopen host answer view (H)" aria-label="Open host answer view">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
+        </button>
+        <button id="btn-fullscreen" class="icon-btn" type="button" title="Toggle full screen" aria-label="Toggle full screen">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="question-banner">
+      <p id="question-text">Question loads here</p>
+    </div>
+
+    <div class="board-wrap">
+      <div class="board" id="board"></div>
+
+      <div class="status-row">
+        <div class="strikes-block">
+          <span class="strikes-label" id="strikes-label">Team A&rsquo;s strikes</span>
+          <div class="strikes" id="strikes" role="img" aria-label="Strikes">
+            <span class="strike" data-idx="0"></span>
+            <span class="strike" data-idx="1"></span>
+            <span class="strike" data-idx="2"></span>
+          </div>
+        </div>
+        <div class="pot">
+          <span class="pot-label">Round Pot</span>
+          <span class="pot-value" id="pot-value">0</span>
+          <span class="pot-target">goes to <strong id="pot-target">Team Faith</strong></span>
+        </div>
+      </div>
+      <p id="danger-message" class="danger-message" aria-live="polite"></p>
+    </div>
+
+    <div class="score-card score-card--a" id="score-card-a">
+      <span class="score-team-name" id="score-name-a">Team Faith</span>
+      <span class="score-value" id="score-value-a">0</span>
+      <span class="score-status" id="score-status-a"></span>
+    </div>
+    <div class="score-card score-card--b" id="score-card-b">
+      <span class="score-team-name" id="score-name-b">Team Grace</span>
+      <span class="score-value" id="score-value-b">0</span>
+      <span class="score-status" id="score-status-b"></span>
+    </div>
+
+    <div class="controls">
+      <div class="controls-row">
+        <div class="seg" role="group" aria-label="Team on the buzzer">
+          <span class="controls-label">On the buzzer</span>
+          <button id="btn-turn-a" class="chip chip--a is-active" type="button" aria-pressed="true">Team A</button>
+          <button id="btn-turn-b" class="chip chip--b" type="button" aria-pressed="false">Team B</button>
+        </div>
+        <button id="btn-strike" class="btn btn--red" type="button">Wrong Answer <kbd>X</kbd></button>
+      </div>
+      <div class="controls-row">
+        <button id="btn-reveal-all" class="btn btn--ghost" type="button">End Round</button>
+        <button id="btn-next-round" class="btn btn--gold" type="button" disabled>Next Round <kbd>N</kbd></button>
+      </div>
+      <div class="controls-row controls-row--mini">
+        <button id="btn-reset-scores" class="btn btn--tiny" type="button">Reset Scores</button>
+        <button id="btn-restart" class="btn btn--tiny" type="button">Restart Show</button>
+        <label class="toggle"><input type="checkbox" id="sound-toggle" checked /> <span>SFX</span></label>
+        <label class="toggle"><input type="checkbox" id="music-toggle" checked /> <span>Music</span></label>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ END SCREEN ============ -->
+  <section id="screen-end" class="screen screen--end" aria-labelledby="end-heading" hidden>
+    <div class="marquee marquee--sm">
+      <span class="eyebrow">Final scores</span>
+      <h1 id="end-heading" class="show-title">Thank You</h1>
+    </div>
+    <div class="final-scores">
+      <div class="final-score final-score--a">
+        <span id="final-name-a">Team Faith</span>
+        <strong id="final-value-a">0</strong>
+      </div>
+      <div class="final-trophy" id="final-trophy" aria-hidden="true">&#x1F3C6;</div>
+      <div class="final-score final-score--b">
+        <span id="final-name-b">Team Grace</span>
+        <strong id="final-value-b">0</strong>
+      </div>
+    </div>
+    <p id="winner-line" class="winner-line" aria-live="polite"></p>
+    <button id="btn-play-again" class="btn btn--gold btn--lg" type="button">Play Again</button>
+  </section>
+
+</main>
+
+<script src="js/questions.js"></script>
+<script src="js/app.js"></script>
+<script src="js/register-sw.js"></script>
+</body>
+</html>

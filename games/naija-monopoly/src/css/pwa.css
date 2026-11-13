@@ -1,0 +1,85 @@
+/* App extras: update and connection notices, install prompt, resume card, back-to-top. */
+
+/* Notices */
+.toasts{
+  position:fixed; z-index:calc(var(--z-modal) + 20); left:0; right:0; bottom:0; display:flex; flex-direction:column; align-items:center; gap:var(--s-2);
+  padding:var(--s-3) var(--s-4) calc(var(--s-4) + env(safe-area-inset-bottom)); pointer-events:none;
+}
+.toast{
+  pointer-events:auto; display:flex; align-items:center; gap:var(--s-3); max-width:min(100%, 34rem);
+  padding:var(--s-3) var(--s-3) var(--s-3) var(--s-4); border-radius:var(--r-lg);
+  background:var(--text); color:var(--bg); box-shadow:var(--shadow-3); font-size:var(--fs-sm); font-weight:600;
+  animation:toastIn var(--dur-3) var(--ease-spring);
+}
+@keyframes toastIn{ from{ opacity:0; transform:translateY(16px) scale(.96); } }
+.toast span{ flex:1; }
+.toast button{ min-height:44px; background:var(--gold-fill); color:var(--on-gold); padding:0 var(--s-4); }
+.toast button.toast-close{ min-width:44px; padding:0; background:transparent; color:inherit; border-color:color-mix(in srgb, var(--bg) 35%, transparent); font-size:1.25rem; }
+
+/* Install banner */
+.install-banner{
+  position:fixed; z-index:calc(var(--z-modal) - 10); right:var(--s-4); bottom:calc(var(--s-4) + env(safe-area-inset-bottom)); width:min(calc(100% - 2*var(--s-4)), 24rem);
+  display:flex; gap:var(--s-3); align-items:center; padding:var(--s-4); background:var(--surface); border:var(--bw) solid var(--border-strong); border-radius:var(--r-lg); box-shadow:var(--shadow-3);
+  animation:toastIn var(--dur-3) var(--ease-spring);
+}
+.install-banner img{ width:48px; height:48px; border-radius:12px; flex-shrink:0; }
+.install-banner p{ margin:0; font-size:var(--fs-sm); line-height:1.35; flex:1; }
+.install-banner strong{ display:block; font-family:var(--font-display); font-size:var(--fs-md); }
+.install-banner .actions{ display:flex; flex-direction:column; gap:var(--s-2); }
+.install-banner button{ min-height:44px; padding:0 var(--s-4); }
+@media (max-width:520px){ .install-banner{ left:var(--s-4); right:var(--s-4); width:auto; } }
+body[data-view="game"] .install-banner{ display:none; }
+
+/* Install section on the landing page */
+.install-card{
+  display:grid; grid-template-columns:auto 1fr auto; gap:var(--s-6); align-items:center; padding:var(--s-6);
+  background:linear-gradient(150deg, #0a3d24, #06231a); color:#eef5f0; border-radius:var(--r-xl); box-shadow:var(--shadow-2);
+}
+.install-card img{ width:88px; height:88px; border-radius:22px; box-shadow:0 10px 30px -10px rgba(0,0,0,.6); }
+.install-card h2{ font-size:var(--fs-xl); letter-spacing:-0.03em; margin-bottom:var(--s-2); }
+.install-card p{ margin:0; color:#b7d3c3; max-width:46ch; }
+.install-card details{ margin-top:var(--s-3); color:#b7d3c3; font-size:var(--fs-sm); }
+.install-card summary{ cursor:pointer; min-height:44px; display:inline-flex; align-items:center; color:var(--gold2); font-weight:700; }
+.install-card details p{ margin:var(--s-2) 0 0; }
+.install-card .btn-gold{ white-space:nowrap; }
+@media (max-width:760px){ .install-card{ grid-template-columns:1fr; text-align:left; padding:var(--s-5); } .install-card img{ width:64px; height:64px; border-radius:16px; } }
+
+/* iPhone guide */
+.ios-steps{ list-style:none; margin:var(--s-5) 0 0; padding:0; text-align:left; display:flex; flex-direction:column; gap:var(--s-4); }
+.ios-steps li{ display:flex; gap:var(--s-3); align-items:flex-start; font-size:var(--fs-sm); }
+.step-n{ flex-shrink:0; width:30px; height:30px; border-radius:50%; display:grid; place-items:center; background:var(--green); color:var(--on-green); font-weight:800; }
+.inline-icon{ width:18px; height:18px; vertical-align:-3px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+
+/* Resume card (top of the start form) */
+.resume-card{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:var(--s-3); margin:0 0 var(--s-5); padding:var(--s-4);
+  background:color-mix(in srgb, var(--green) 10%, var(--surface)); border:var(--bw) solid var(--green); border-radius:var(--r-md);
+}
+.resume-card strong{ display:block; font-family:var(--font-display); }
+.resume-card span{ font-size:var(--fs-xs); color:var(--text-muted); font-weight:600; }
+.resume-actions{ display:flex; gap:var(--s-2); }
+.resume-actions button{ min-height:44px; padding:0 var(--s-4); }
+
+/* Back to top */
+.to-top{
+  position:fixed; z-index:var(--z-header); right:var(--s-4); bottom:calc(var(--s-4) + env(safe-area-inset-bottom)); width:48px; height:48px; padding:0; border-radius:50%;
+  opacity:0; visibility:hidden; transform:translateY(12px); transition:opacity var(--dur-2) var(--ease-out), transform var(--dur-2) var(--ease-out), visibility var(--dur-2);
+}
+.to-top.is-visible{ opacity:1; visibility:visible; transform:none; }
+.to-top svg{ width:20px; height:20px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+/* Installed app polish: no accidental text selection on controls, no pull-to-refresh bounce inside the board */
+button, .btn, summary, .tile, .die-face{ -webkit-user-select:none; user-select:none; }
+@media (display-mode: standalone){ html{ overscroll-behavior-y:none; } .site-header{ padding-top:env(safe-area-inset-top); } }
+body{ padding-left:env(safe-area-inset-left); padding-right:env(safe-area-inset-right); }
+
+@media print{
+  .toasts, .install-banner, .to-top, #install, .site-header, .site-footer .footer-links{ display:none !important; }
+  .js .reveal{ opacity:1 !important; transform:none !important; }
+  body{ background:#fff; color:#000; }
+  details:not([open]) > div{ display:block; }
+}
+
+/* The header Install button keeps its label on phones, because an icon alone does not say what it does. */
+@media (max-width:760px){ .header-actions #installBtn{ padding:0 var(--s-3); } .header-actions #installBtn .btn-label-always{ display:inline; } }
+body[data-view="game"] #installBtn{ display:none; }

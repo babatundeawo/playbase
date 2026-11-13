@@ -1,0 +1,100 @@
+{
+  "id": "./",
+  "name": "Naija Monopoly — Wealth Wahala Edition",
+  "short_name": "Naija Monopoly",
+  "description": "A Nigerian-themed Monopoly game with the full official rules. Free, works offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "any",
+  "background_color": "#060e09",
+  "theme_color": "#008751",
+  "lang": "en-NG",
+  "dir": "ltr",
+  "categories": [
+    "games",
+    "entertainment"
+  ],
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New game",
+      "short_name": "New game",
+      "description": "Set up players and start a game",
+      "url": "./#play",
+      "icons": [
+        {
+          "src": "assets/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Rules",
+      "short_name": "Rules",
+      "description": "Read the rules in short",
+      "url": "./#rules",
+      "icons": [
+        {
+          "src": "assets/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "assets/screenshots/wide-home.png",
+      "sizes": "1440x900",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Start screen with the new-game form"
+    },
+    {
+      "src": "assets/screenshots/wide-game.png",
+      "sizes": "1440x900",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "A four-player game in progress"
+    },
+    {
+      "src": "assets/screenshots/narrow-home.png",
+      "sizes": "780x1688",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Start screen on a phone"
+    },
+    {
+      "src": "assets/screenshots/narrow-game.png",
+      "sizes": "780x1688",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "The board on a phone"
+    }
+  ]
+}

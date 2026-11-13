@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; base-uri 'self'; form-action 'none'">
+  <meta name="description" content="QuizMaster is offline. Reconnect, or open the game again once it has been saved on your device.">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Offline | QuizMaster</title>
+  <meta name="robots" content="noindex">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#5b4bff">
+  <link rel="icon" href="assets/images/icons/favicon.svg" type="image/svg+xml">
+  <style>
+    :root { color-scheme: light dark; --bg: #f6f6fb; --text: #13132a; --muted: #5a5a78; --primary: #5b4bff; --on: #fff; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #0a0a16; --text: #f2f2fc; --muted: #a9a9c9; --primary: #8b7dff; --on: #0b0a20; } }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100dvh; display: grid; place-items: center; padding: 1.5rem; background: var(--bg); color: var(--text); font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; text-align: center; line-height: 1.6; }
+    main { max-width: 26rem; }
+    h1 { font-size: clamp(1.75rem, 1.4rem + 1.6vw, 2.4rem); letter-spacing: -0.03em; line-height: 1.1; margin: 0 0 0.75rem; }
+    p { color: var(--muted); margin: 0 0 1.5rem; }
+    a { display: inline-block; min-height: 44px; padding: 0.7rem 1.4rem; border-radius: 999px; background: var(--primary); color: var(--on); font-weight: 600; text-decoration: none; }
+    a:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>You are offline</h1>
+    <p>This page is not saved on your device yet. The quiz and its built-in questions still work once the game has been opened online.</p>
+    <a href="./">Back to QuizMaster</a>
+  </main>
+</body>
+</html>

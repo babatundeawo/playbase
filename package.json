@@ -1,0 +1,15 @@
+{
+  "name": "playbase",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "One home for all my games: a carousel hub with each game kept self-contained.",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:preview": "node scripts/build.mjs --preview",
+    "serve": "node scripts/serve.mjs"
+  }
+}

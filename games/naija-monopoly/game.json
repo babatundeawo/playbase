@@ -1,0 +1,24 @@
+{
+  "id": "naija-monopoly",
+  "title": "Naija Monopoly",
+  "tagline": "Own Naija, one roll at a time.",
+  "description": "A Nigerian-themed Monopoly (Wealth Wahala Edition) with the full official rules. Buy streets from Yaba to Banana Island, ride the Lagos and Kano railways, and pay NEPA when the light is on. Two to four players on one device, with any seat played by a person or the computer.",
+  "category": "Board game",
+  "tags": ["Board game", "Strategy", "Nigerian", "Offline"],
+  "players": "2-4 players, one device",
+  "features": [
+    "Full official rules: auctions, houses and hotels, mortgages and trades",
+    "Computer opponents that roll, buy, bid and answer trade offers",
+    "Aza Chance and Ileya Chest cards, Kirikiri Prison and Nigerian tokens",
+    "Saves itself and plays offline once opened"
+  ],
+  "accent": "#008751",
+  "cover": "docs/assets/preview-game.png",
+  "source": "https://github.com/babatundeawo/naija-monopoly",
+  "build": {
+    "command": "node scripts/build.mjs",
+    "output": "dist",
+    "env": { "SITE_URL": "{siteNoSlash}" },
+    "checks": ["node scripts/check.mjs"]
+  }
+}

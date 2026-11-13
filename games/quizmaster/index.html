@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com https://apis.google.com; style-src 'self'; font-src 'self'; img-src 'self' data:; connect-src 'self' https://*.googleapis.com wss://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com; frame-src https://*.firebaseapp.com https://accounts.google.com; manifest-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>QuizMaster | A quiz game with timers, levels and a leaderboard</title>
+  <meta name="description" content="QuizMaster is a free quiz game. Pick a topic and difficulty, race the timer, create your own questions and climb the online leaderboard.">
+  <link rel="canonical" href="__SITE_URL__">
+  <meta name="theme-color" content="#f6f6fb">
+  <meta name="color-scheme" content="light dark">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="QuizMaster">
+  <meta property="og:title" content="QuizMaster | Think fast. Play smart.">
+  <meta property="og:description" content="Pick a topic, beat the clock and climb the leaderboard. Create your own questions and challenge your friends.">
+  <meta property="og:url" content="__SITE_URL__">
+  <meta property="og:image" content="__SITE_URL__assets/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The QuizMaster logo on a purple gradient background">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="QuizMaster | Think fast. Play smart.">
+  <meta name="twitter:description" content="Pick a topic, beat the clock and climb the leaderboard.">
+  <meta name="twitter:image" content="__SITE_URL__assets/images/og-image.png">
+
+  <link rel="icon" href="assets/images/icons/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/images/icons/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="shortcut icon" href="assets/images/icons/favicon.ico">
+  <link rel="apple-touch-icon" href="assets/images/icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-title" content="QuizMaster">
+
+  <link rel="preload" href="assets/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/sora-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/fonts.css">
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "QuizMaster",
+    "url": "__SITE_URL__",
+    "description": "A quiz game with categories, difficulty levels, a timer, a question editor and an online leaderboard.",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "isAccessibleForFree": true
+  }
+  </script>
+</head>
+<body data-screen="loading-screen">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Icon sprite: every icon in the app is drawn from here -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.5V5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M18.7 5.3l-1.8 1.8M7.1 16.9l-1.8 1.8"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7"/><path d="M6 10v9h12v-9"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5v1.5A3 3 0 0 0 8 10.5M16 6h3v1.5a3 3 0 0 1-3 3"/><path d="M12 13v4M8.5 20h7M10 17h4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 4H5v16h5"/><path d="M15 8l4 4-4 4M19 12H9"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></symbol>
+    <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 0 1 3 3L8 19z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></symbol>
+  </svg>
+
+  <header class="site-header" id="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="./" id="brand-link" aria-label="QuizMaster home">
+        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true" focusable="false">
+          <defs>
+            <linearGradient id="logo-gradient" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#5b4bff"/>
+              <stop offset="1" stop-color="#8a3cff"/>
+            </linearGradient>
+          </defs>
+          <rect width="40" height="40" rx="11" fill="url(#logo-gradient)"/>
+          <circle cx="19" cy="18.5" r="8" fill="none" stroke="#ffffff" stroke-width="3.6"/>
+          <path d="M23.5 23.5l6 6" stroke="#ffb020" stroke-width="3.6" stroke-linecap="round"/>
+        </svg>
+        <span class="brand__name">QuizMaster</span>
+      </a>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Primary" hidden>
+        <button type="button" class="nav-link" data-nav="home">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-home"></use></svg><span>Home</span>
+        </button>
+        <button type="button" class="nav-link" data-nav="play">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg><span>Play</span>
+        </button>
+        <button type="button" class="nav-link" data-nav="create">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pencil"></use></svg><span>Create</span>
+        </button>
+        <button type="button" class="nav-link" data-nav="leaderboard">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trophy"></use></svg><span>Leaderboard</span>
+        </button>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="icon-btn theme-toggle" id="theme-toggle">
+          <svg class="icon icon-moon" aria-hidden="true" focusable="false"><use href="#i-moon"></use></svg>
+          <svg class="icon icon-sun" aria-hidden="true" focusable="false"><use href="#i-sun"></use></svg>
+        </button>
+
+        <div class="account" id="account" hidden>
+          <button type="button" class="icon-btn account__btn" id="account-btn" aria-expanded="false" aria-controls="account-menu" aria-label="Account menu">
+            <span id="account-initial" aria-hidden="true">?</span>
+          </button>
+          <div class="account__menu" id="account-menu" hidden>
+            <div class="account__who">
+              <p class="account__name" id="account-name"></p>
+              <p class="account__type" id="account-type"></p>
+            </div>
+            <button type="button" class="menu-item" id="change-name-btn">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-pencil"></use></svg>Change nickname
+            </button>
+            <button type="button" class="menu-item" id="signout-btn">
+              <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-logout"></use></svg>Sign out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <noscript>
+      <p class="noscript-banner">QuizMaster needs JavaScript to run. Please turn JavaScript on in your browser and reload this page.</p>
+    </noscript>
+
+    <!-- Loading -->
+    <section id="loading-screen" class="screen" aria-label="Loading">
+      <div class="loading" role="status">
+        <div class="spinner" aria-hidden="true"></div>
+        <p>Loading QuizMaster...</p>
+      </div>
+    </section>
+
+    <!-- Sign in (landing) -->
+    <section id="signin-screen" class="screen" aria-labelledby="signin-title" hidden>
+      <div class="hero">
+        <span class="hero__orb hero__orb--one" aria-hidden="true"></span>
+        <span class="hero__orb hero__orb--two" aria-hidden="true"></span>
+        <p class="hero__eyebrow">
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-sparkle"></use></svg>
+          The quiz game for curious minds
+        </p>
+        <h1 class="hero__title" id="signin-title" tabindex="-1" data-focus>Think fast. <span class="text-gradient">Play smart.</span></h1>
+        <p class="hero__lead">Pick a topic, beat the clock and climb the leaderboard. Make your own questions and challenge your friends.</p>
+        <div class="hero__actions">
+          <button type="button" class="btn btn--primary btn--lg" id="guest-btn">Play as guest</button>
+          <button type="button" class="btn btn--secondary btn--lg" id="google-btn">Continue with Google</button>
+        </div>
+        <p class="status status--error" id="signin-message" role="alert"></p>
+        <div class="hero-error" id="cloud-error" hidden>
+          <p><strong>We could not reach the online service.</strong> Check your internet connection and try again. You can also play offline with the built-in questions, but scores will not be saved online.</p>
+          <div class="form-actions form-actions--flush">
+            <button type="button" class="btn btn--secondary btn--sm" id="retry-btn">Try again</button>
+            <button type="button" class="btn btn--ghost btn--sm" id="offline-btn">Play offline</button>
+          </div>
+        </div>
+        <p class="hero__note">Guest accounts live in one browser. Use Google to keep your scores on every device. Choose a nickname, never your real name.</p>
+        <ul class="facts" id="facts" aria-label="QuizMaster at a glance"></ul>
+      </div>
+
+      <ol class="steps" aria-label="How it works">
+        <li class="step reveal">
+          <h2 class="step__title">Choose a topic</h2>
+          <p class="step__text">Pick a category and a difficulty level, or mix them all.</p>
+        </li>
+        <li class="step reveal" data-delay="1">
+          <h2 class="step__title">Beat the clock</h2>
+          <p class="step__text">Every question has a countdown. Think fast and keep your score climbing.</p>
+        </li>
+        <li class="step reveal" data-delay="2">
+          <h2 class="step__title">Climb the leaderboard</h2>
+          <p class="step__text">Your points add up on weekly, monthly, yearly and lifetime leaderboards.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- Nickname -->
+    <section id="name-screen" class="screen screen--narrow" aria-labelledby="name-title" hidden>
+      <div class="panel">
+        <div class="screen__head">
+          <h1 class="screen__title" id="name-title" tabindex="-1" data-focus>Choose your player name</h1>
+          <p class="screen__lead">Use a nickname, not your real name. Other players will see it on the leaderboard.</p>
+        </div>
+        <form class="form" id="name-form" novalidate>
+          <div class="field">
+            <label class="field__label" for="player-name">Player name</label>
+            <input class="input" type="text" id="player-name" name="nickname" maxlength="15" autocomplete="off" autocapitalize="words" placeholder="For example: QuizNinja" aria-describedby="name-hint name-error">
+            <p class="field__hint" id="name-hint">2 to 15 characters.</p>
+            <p class="field__error" id="name-error" role="alert"></p>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary" id="save-name-btn">Save name</button>
+            <button type="button" class="btn btn--ghost" id="name-cancel-btn" hidden>Cancel</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Home -->
+    <section id="home-screen" class="screen" aria-labelledby="home-title" hidden>
+      <div class="screen__head">
+        <h1 class="screen__title" id="home-title" tabindex="-1" data-focus>Welcome back, <span id="player-name-display"></span></h1>
+        <p class="screen__lead">Ready for the next challenge?</p>
+      </div>
+
+      <div class="bento">
+        <div class="bento__start">
+          <h2 class="bento__start-title">Test your brain</h2>
+          <p class="bento__start-text">Choose a topic and a level, then race the clock. Beat your best score.</p>
+          <button type="button" class="btn btn--lg btn--on-gradient" id="start-btn">
+            Start a quiz
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-arrow"></use></svg>
+          </button>
+        </div>
+
+        <div class="card stat bento__stat">
+          <span class="stat__label">Best score</span>
+          <span class="stat__value" id="home-best">0%</span>
+        </div>
+        <div class="card stat bento__stat">
+          <span class="stat__label">Games played</span>
+          <span class="stat__value" id="games-played">0</span>
+        </div>
+
+        <button type="button" class="card card--interactive action-card bento__half" id="editor-btn">
+          <span class="action-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-plus"></use></svg></span>
+          <span>
+            <span class="action-card__title">Create questions</span><br>
+            <span class="action-card__text">Add your own for everyone to play.</span>
+          </span>
+        </button>
+        <button type="button" class="card card--interactive action-card bento__half" id="leaderboard-btn">
+          <span class="action-card__icon"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trophy"></use></svg></span>
+          <span>
+            <span class="action-card__title">Leaderboard</span><br>
+            <span class="action-card__text">See the top players this week, month, year and of all time.</span>
+          </span>
+        </button>
+      </div>
+      <p class="status cloud-status" id="cloud-status"></p>
+    </section>
+
+    <!-- Choose a quiz -->
+    <section id="setup-screen" class="screen" aria-labelledby="setup-title" hidden>
+      <div class="screen__head">
+        <h1 class="screen__title" id="setup-title" tabindex="-1" data-focus>Choose your quiz</h1>
+        <p class="screen__lead">Pick a topic and a difficulty level.</p>
+      </div>
+
+      <div class="setup-section">
+        <h2 class="setup-section__title" id="topic-heading">Topic</h2>
+        <ul class="tile-grid" id="category-tiles" role="list" aria-labelledby="topic-heading"></ul>
+      </div>
+
+      <div class="setup-section">
+        <h2 class="setup-section__title" id="level-heading">Difficulty</h2>
+        <div class="segmented" id="difficulty-buttons" role="group" aria-labelledby="level-heading"></div>
+      </div>
+
+      <div class="setup-footer">
+        <button type="button" class="btn btn--primary btn--lg" id="begin-btn">
+          Begin quiz
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-play"></use></svg>
+        </button>
+        <button type="button" class="btn btn--ghost" id="setup-back-btn">Back</button>
+        <p class="status" id="availability"></p>
+      </div>
+      <p class="status status--error" id="setup-message" role="alert"></p>
+    </section>
+
+    <!-- Question editor -->
+    <section id="editor-screen" class="screen screen--narrow" aria-labelledby="editor-title" hidden>
+      <div class="screen__head">
+        <h1 class="screen__title" id="editor-title" tabindex="-1" data-focus>Create a question</h1>
+        <p class="screen__lead">Questions you add are shared with every player.</p>
+      </div>
+
+      <div class="hero-error" id="editor-offline" hidden>
+        <p>Creating questions needs an internet connection and a signed-in player.</p>
+      </div>
+
+      <form class="form" id="editor-form" novalidate>
+        <div class="field">
+          <label class="field__label" for="new-question">Question</label>
+          <input class="input" type="text" id="new-question" maxlength="200" placeholder="Type your question" aria-describedby="new-question-error">
+          <p class="field__error" id="new-question-error"></p>
+        </div>
+
+        <fieldset class="fieldset-plain">
+          <legend>Answer options (choose the correct one)</legend>
+          <div class="option-row">
+            <div class="field">
+              <label class="field__label" for="new-option-0">Option A</label>
+              <input class="input" type="text" id="new-option-0" maxlength="100">
+            </div>
+            <label class="radio-pick"><input type="radio" name="correct" value="0" checked> Correct</label>
+          </div>
+          <div class="option-row">
+            <div class="field">
+              <label class="field__label" for="new-option-1">Option B</label>
+              <input class="input" type="text" id="new-option-1" maxlength="100">
+            </div>
+            <label class="radio-pick"><input type="radio" name="correct" value="1"> Correct</label>
+          </div>
+          <div class="option-row">
+            <div class="field">
+              <label class="field__label" for="new-option-2">Option C</label>
+              <input class="input" type="text" id="new-option-2" maxlength="100">
+            </div>
+            <label class="radio-pick"><input type="radio" name="correct" value="2"> Correct</label>
+          </div>
+          <div class="option-row">
+            <div class="field">
+              <label class="field__label" for="new-option-3">Option D</label>
+              <input class="input" type="text" id="new-option-3" maxlength="100">
+            </div>
+            <label class="radio-pick"><input type="radio" name="correct" value="3"> Correct</label>
+          </div>
+          <p class="field__error" id="new-options-error"></p>
+        </fieldset>
+
+        <div class="form-row">
+          <div class="field">
+            <label class="field__label" for="new-category">Category</label>
+            <input class="input" type="text" id="new-category" maxlength="30" list="category-list" placeholder="Pick one or type a new one" aria-describedby="new-category-error">
+            <datalist id="category-list"></datalist>
+            <p class="field__error" id="new-category-error"></p>
+          </div>
+          <div class="field">
+            <label class="field__label" for="new-difficulty">Difficulty</label>
+            <select class="input" id="new-difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+        </div>
+
+        <p class="status" id="editor-message" role="status"></p>
+        <div class="form-actions">
+          <button type="submit" class="btn btn--primary" id="save-question-btn">Save question</button>
+          <button type="button" class="btn btn--ghost" id="editor-back-btn">Back</button>
+        </div>
+      </form>
+
+      <h2 class="section-title">Your questions</h2>
+      <ul class="question-list" id="custom-list" role="list"></ul>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz-screen" class="screen" aria-labelledby="quiz-heading" hidden>
+      <h1 class="sr-only" id="quiz-heading">Quiz</h1>
+      <div class="quiz">
+        <div class="quiz__top">
+          <div class="quiz__meta">
+            <span class="quiz__count" id="quiz-count">Question 1 of 10</span>
+            <span class="badge badge--category" id="quiz-category"></span>
+            <span class="badge" id="quiz-level"></span>
+          </div>
+          <div class="quiz__status">
+            <span class="score-pill" id="live-score">Score: 0</span>
+            <div class="timer" id="timer" role="timer" aria-label="Time left">
+              <svg class="timer__ring" viewBox="0 0 44 44" aria-hidden="true" focusable="false">
+                <circle class="timer__track" cx="22" cy="22" r="18"/>
+                <circle class="timer__value" id="timer-value" cx="22" cy="22" r="18"/>
+              </svg>
+              <span class="timer__text" id="timer-text">15</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="progress" id="quiz-progress" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress__bar" id="quiz-progress-bar"></div>
+        </div>
+
+        <div class="question">
+          <h2 class="question__text" id="question-text" tabindex="-1" data-focus></h2>
+        </div>
+
+        <div class="options" id="options" role="group" aria-labelledby="question-text"></div>
+
+        <div class="quiz__footer">
+          <p class="quiz__hint">Tip: press 1 to 4 (or A to D) to answer.</p>
+          <button type="button" class="btn btn--primary" id="next-btn" hidden>Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Result -->
+    <section id="result-screen" class="screen" aria-labelledby="result-title" hidden>
+      <div class="result">
+        <div class="result__ring">
+          <svg viewBox="0 0 110 110" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="result-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#5b4bff"/>
+                <stop offset="1" stop-color="#ff7ab8"/>
+              </linearGradient>
+            </defs>
+            <circle class="result__track" cx="55" cy="55" r="48"/>
+            <circle class="result__value" id="result-ring" cx="55" cy="55" r="48"/>
+          </svg>
+          <span class="result__percent" id="result-percent">0%</span>
+        </div>
+        <h1 class="result__title" id="result-title" tabindex="-1" data-focus>Quiz complete!</h1>
+        <p class="result__score" id="final-score">You scored <strong>0</strong> out of 0</p>
+        <p class="new-best" id="high-score-message" hidden>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-sparkle"></use></svg>
+          New high score!
+        </p>
+        <p class="status" id="best-score-line">Best score: <span id="best-score">0%</span></p>
+        <p class="status" id="leaderboard-status" role="status"></p>
+        <div class="result__actions">
+          <button type="button" class="btn btn--primary" id="play-again-btn">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-refresh"></use></svg>Play again
+          </button>
+          <button type="button" class="btn btn--secondary" id="view-leaderboard-btn">
+            <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-trophy"></use></svg>Leaderboard
+          </button>
+          <button type="button" class="btn btn--ghost" id="home-btn">Home</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Leaderboard -->
+    <section id="leaderboard-screen" class="screen screen--narrow" aria-labelledby="leaderboard-title" hidden>
+      <div class="screen__head">
+        <h1 class="screen__title" id="leaderboard-title" tabindex="-1" data-focus>Leaderboard</h1>
+        <p class="screen__lead">The top 10 players by total points. Every correct answer is worth 10 points.</p>
+      </div>
+
+      <div class="lb-filters">
+        <div class="segmented" id="leaderboard-filter" role="group" aria-label="Choose a leaderboard period"></div>
+        <p class="lb-note" id="leaderboard-period"></p>
+      </div>
+
+      <p class="status" id="leaderboard-message" role="status"></p>
+      <ol class="lb-list" id="leaderboard-list" role="list"></ol>
+      <div class="form-actions form-actions--spaced">
+        <button type="button" class="btn btn--secondary btn--sm" id="leaderboard-retry-btn" hidden>
+          <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-refresh"></use></svg>Try again
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p>QuizMaster. Built with Techbase.</p>
+      <p><a href="privacy.html">Privacy</a></p>
+    </div>
+  </footer>
+
+  <dialog class="modal" id="confirm-dialog" aria-labelledby="confirm-title">
+    <form method="dialog">
+      <h2 class="modal__title" id="confirm-title"></h2>
+      <p id="confirm-message"></p>
+      <div class="modal__actions">
+        <button type="submit" class="btn btn--ghost" value="cancel">Cancel</button>
+        <button type="submit" class="btn btn--primary" id="confirm-ok" value="confirm">OK</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast-region" id="toast-region" role="status" aria-live="polite"></div>
+  <div class="sr-only" id="sr-live" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="js/questions.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
