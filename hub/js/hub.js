@@ -16,15 +16,16 @@ function el(tag, props = {}, ...children) {
   return node;
 }
 
-// Pick dark or light text for a game's accent colour, whichever reads better (WCAG contrast).
+// Pick white or near-black text for a game's accent colour, whichever reads better (WCAG contrast).
 function channel(v) { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }
 function luminance(hex) {
   const n = parseInt(hex.replace('#', ''), 16);
   return 0.2126 * channel((n >> 16) & 255) + 0.7152 * channel((n >> 8) & 255) + 0.0722 * channel(n & 255);
 }
+const contrast = (a, b) => (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
 function onAccent(hex) {
   const L = luminance(hex);
-  return (1.05) / (L + 0.05) >= (L + 0.05) / (luminance('#0C1233') + 0.05) ? '#FFFFFF' : '#0C1233';
+  return contrast(L, luminance('#ffffff')) >= contrast(L, luminance('#15161a')) ? '#ffffff' : '#15161a';
 }
 function paint(node, game) {
   node.style.setProperty('--accent', game.accent);
@@ -67,7 +68,7 @@ function renderHero(game, animate = false) {
     ),
     el('div', { class: 'hero-art' }, el('img', { src: game.cover, alt: `${game.title} on screen`, width: 1280, height: 800, fetchpriority: 'high' })),
   );
-  paint(heroEl, game);
+  paint(document.documentElement, game);
   if (animate) {
     heroEl.classList.remove('swap');
     void heroEl.offsetWidth; // restart the animation
@@ -168,6 +169,31 @@ addEventListener('hashchange', () => {
   if (id && games.some((g) => g.id === id)) openDetail(id);
   else if (dialog.open) dialog.close();
 });
+
+// ---------- Light / dark theme ----------
+// Follows the device by default. The toggle lets a visitor pick one; the choice is remembered on this device only.
+const root = document.documentElement;
+const themeButton = $('#theme');
+const darkQuery = matchMedia('(prefers-color-scheme: dark)');
+const SUN = 'M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8z';
+const MOON = 'M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z';
+const currentTheme = () => root.dataset.theme || (darkQuery.matches ? 'dark' : 'light');
+
+function showTheme() {
+  const dark = currentTheme() === 'dark';
+  themeButton.replaceChildren(icon(dark ? SUN : MOON));
+  themeButton.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+  themeButton.title = dark ? 'Switch to light theme' : 'Switch to dark theme';
+  for (const meta of document.querySelectorAll('meta[name="theme-color"]')) meta.setAttribute('content', dark ? '#0e0f12' : '#ffffff');
+}
+themeButton.addEventListener('click', () => {
+  const next = currentTheme() === 'dark' ? 'light' : 'dark';
+  root.dataset.theme = next;
+  try { localStorage.setItem('playbase-theme', next); } catch { /* private window: the choice just is not remembered */ }
+  showTheme();
+});
+darkQuery.addEventListener('change', showTheme);
+showTheme();
 
 // ---------- Start ----------
 $('#q').addEventListener('input', (event) => { query = event.target.value; renderRows(); });

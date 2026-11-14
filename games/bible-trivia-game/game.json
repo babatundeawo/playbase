@@ -4,7 +4,12 @@
   "tagline": "A host-led Bible trivia game for church game nights.",
   "description": "Turn a laptop and a projector into a quiz-show stage. One person hosts on the big screen while up to four players take turns answering, and everyone else joins from their own phone with a four-letter code to vote when a player asks the audience. 600 Bible questions and 150 Church History questions.",
   "category": "Party game",
-  "tags": ["Bible", "Trivia", "Group", "Live audience"],
+  "tags": [
+    "Bible",
+    "Trivia",
+    "Group",
+    "Live audience"
+  ],
   "players": "1-4 players plus a live audience",
   "features": [
     "750 questions, each answer followed by the full KJV verse",
@@ -12,12 +17,14 @@
     "Audience joins from their phones with a room code",
     "Works offline after the first visit (voting needs a connection)"
   ],
-  "accent": "#c9a227",
+  "accent": "#c8102e",
   "cover": "docs/assets/preview-game.png",
   "source": "https://github.com/rccgkd/bible-trivia-game",
   "build": {
     "command": "node scripts/build.mjs",
     "output": "dist",
-    "checks": ["node scripts/lint.mjs"]
+    "checks": [
+      "node scripts/lint.mjs"
+    ]
   }
 }

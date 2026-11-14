@@ -4,7 +4,12 @@
   "tagline": "15 questions. Three lifelines. ₦1,000,000 at the top.",
   "description": "Climb a 15-step prize ladder, use your lifelines wisely and decide whether to risk it or walk away. Questions are drawn at random from a bank of 269, from easy to very hard. No account, no download and no real money.",
   "category": "Quiz",
-  "tags": ["Quiz", "Game show", "Solo", "Offline"],
+  "tags": [
+    "Quiz",
+    "Game show",
+    "Solo",
+    "Offline"
+  ],
   "players": "1 player",
   "features": [
     "50:50, Phone a friend and Ask the audience lifelines",
@@ -12,14 +17,20 @@
     "Walk away any time and keep your last secured prize",
     "Optional AI-written questions with your own free Groq key"
   ],
-  "accent": "#e9c15a",
+  "accent": "#e0a100",
   "cover": "docs/assets/screenshot-home.png",
   "source": "https://github.com/babatundeawo/Millionaire-Mindset",
   "build": {
     "install": "npm install --no-audit --no-fund",
     "command": "node scripts/build.mjs",
     "output": "dist",
-    "env": { "SITE_URL": "{site}" },
-    "checks": ["npm test", "npm run contrast", "npm run check"]
+    "env": {
+      "SITE_URL": "{site}"
+    },
+    "checks": [
+      "npm test",
+      "npm run contrast",
+      "npm run check"
+    ]
   }
 }

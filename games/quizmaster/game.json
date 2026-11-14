@@ -4,7 +4,12 @@
   "tagline": "Think fast. Play smart.",
   "description": "A quiz game with 400 questions across Science, Geography, Maths and Technology. Pick a topic and a difficulty, beat the countdown, and see how you rank on the weekly, monthly, yearly and lifetime leaderboards. Players can also write their own questions for everyone.",
   "category": "Quiz",
-  "tags": ["Quiz", "Leaderboard", "Solo", "Online"],
+  "tags": [
+    "Quiz",
+    "Leaderboard",
+    "Solo",
+    "Online"
+  ],
   "players": "1 player, online leaderboard",
   "features": [
     "400 questions with easy, medium and hard levels",
@@ -35,6 +40,8 @@
       "FIREBASE_MESSAGING_SENDER_ID": "0",
       "FIREBASE_APP_ID": "ci-check"
     },
-    "checks": ["python3 scripts/check_site.py dist"]
+    "checks": [
+      "python3 scripts/check_site.py dist"
+    ]
   }
 }

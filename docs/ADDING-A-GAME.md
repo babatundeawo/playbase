@@ -39,7 +39,8 @@ A game is a folder with a `game.json` file. Add one and it appears in the carous
 | Field | What it does |
 | --- | --- |
 | `category` | Games with the same category share a row. |
-| `accent` | The game's own colour for its buttons and glow. |
+| `accent` | The game's own colour. The hub tints its top section, buttons and card edge with it. Pick a mid-to-strong colour; the hub chooses white or dark button text automatically. |
+| `bar` | Optional. `false` leaves out the Home and Back to start bar for this game. |
 | `featured` | `true` makes it the game shown at the top. If none is set, a random game is shown each visit. |
 | `order` | Lower numbers come first. Optional. |
 | `build.install` | Optional. Runs first, for example `npm install`. |
@@ -49,6 +50,18 @@ A game is a folder with a `game.json` file. Add one and it appears in the carous
 | `build.checks` | Optional commands that must pass. |
 
 A game with no build step still needs a `build.command` that produces its `output` folder. Keep the finished site in a `public/` folder and use `"command": "node -e \"require('fs').cpSync('public', 'dist', {recursive: true})\""`.
+
+## The Home and Back to start bar
+
+The build adds a small floating bar to the bottom-left of every game's `index.html`:
+
+- **Home** goes to the carousel.
+- **Back to start** goes to the game's front page. If the player has already done something, it first asks, because it ends the current round.
+
+On a long page the bar slides out of the way while scrolling down and returns when scrolling up. You do not need to add anything to your game. Two things to know:
+
+- It is added to `index.html` only, so a game's other pages (like Bible Family Feud's host window) are left alone.
+- Keep the bottom-left corner of your game's front screen free of important buttons that never scroll.
 
 ## Rules that keep games from affecting each other
 
