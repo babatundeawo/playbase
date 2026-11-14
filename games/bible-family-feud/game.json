@@ -17,7 +17,7 @@
     "Private Host Answer View in a second window",
     "Music and sound effects, keyboard shortcuts, works offline"
   ],
-  "accent": "#f2b632",
+  "accent": "#0f9d8f",
   "cover": "docs/assets/preview-game.webp",
   "source": "https://github.com/rccgkd/bible-family-feud",
   "build": {

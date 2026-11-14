@@ -138,6 +138,7 @@ main {
   margin-inline: auto;
   padding: var(--space-6) var(--space-5) var(--space-12);
   outline: none;
+  overflow-x: clip; /* Playbase: the glow orbs stick out past a phone screen; clip them so the page does not scroll sideways */
 }
 
 body.has-nav main {

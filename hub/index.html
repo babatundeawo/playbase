@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Playbase: free games to play together</title>
   <meta name="description" content="Quiz nights, Bible trivia, Monopoly and more. Free games that run in your browser, with no account and nothing to install.">
-  <meta name="theme-color" content="#0C1233">
-  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0e0f12" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <script>try{var t=localStorage.getItem('playbase-theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}</script>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="%SITE_URL%">
   <meta property="og:type" content="website">
@@ -28,6 +30,7 @@
       <span class="sr">Search games</span>
       <input id="q" type="search" placeholder="Search games" autocomplete="off" enterkeyhint="search">
     </label>
+    <button id="theme" class="theme" type="button"></button>
   </header>
 
   <main>

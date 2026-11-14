@@ -1,0 +1,88 @@
+/* Playbase game bar: Home and "Back to start", shown inside every game.
+   Written to survive each game's own global styles: every rule uses two classes, and buttons reset themselves. */
+
+.pb-bar {
+  position: fixed;
+  left: max(12px, env(safe-area-inset-left));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  z-index: 2147483000;
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(22, 23, 27, 0.94);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.22), 0 10px 28px -8px rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+  transition: transform 0.25s ease;
+}
+/* Slides out of the way while the page is scrolled down, so it never sits on a game's own buttons. */
+.pb-bar.pb-hidden { transform: translateY(calc(100% + 24px)); }
+.pb-bar .pb-btn {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 40px;
+  padding: 0 0.95rem 0 0.8rem;
+  border-radius: 999px;
+  color: #ffffff;
+  font: 600 14px/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.pb-bar .pb-btn:hover { background: rgba(255, 255, 255, 0.18); }
+.pb-bar .pb-btn:active { background: rgba(255, 255, 255, 0.28); }
+.pb-bar .pb-btn:focus-visible { outline: 3px solid #ffffff; outline-offset: 2px; }
+.pb-bar .pb-btn svg { display: block; width: 18px; height: 18px; flex: none; }
+
+.pb-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483001;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(10, 10, 14, 0.6);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  box-sizing: border-box;
+}
+.pb-overlay .pb-card {
+  box-sizing: border-box;
+  width: min(24rem, 100%);
+  padding: 1.4rem;
+  border-radius: 18px;
+  background: #ffffff;
+  color: #16171b;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.5);
+  text-align: left;
+}
+.pb-overlay .pb-title { margin: 0 0 0.4rem; font: 700 1.2rem/1.25 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #16171b; }
+.pb-overlay .pb-text { margin: 0 0 1.2rem; font: 400 1rem/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #44474f; }
+.pb-overlay .pb-row { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+.pb-overlay .pb-choice {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 1.2rem;
+  border-radius: 999px;
+  background: #e9e9ee;
+  color: #16171b;
+  font: 650 1rem/1 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  cursor: pointer;
+}
+.pb-overlay .pb-choice:hover { background: #dcdce3; }
+.pb-overlay .pb-choice.pb-go { background: #16171b; color: #ffffff; }
+.pb-overlay .pb-choice.pb-go:hover { background: #33353d; }
+.pb-overlay .pb-choice:focus-visible { outline: 3px solid #16171b; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) { .pb-bar { transition: none; } }
+
+@media print { .pb-bar, .pb-overlay { display: none; } }

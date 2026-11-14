@@ -10,11 +10,14 @@
 //   node scripts/build.mjs --skip-checks      skip each game's own checks
 //   node scripts/build.mjs --site https://example.com/playbase/   address the site is published at
 //
+// Every game also gets the shared Home / "Back to start" bar (scripts/game-bar). Set "bar": false in a game's game.json to opt out.
+//
 // Each game describes itself in games/<id>/game.json. Adding a game means adding a folder with that file;
 // this script and the hub page never need to change. See docs/ADDING-A-GAME.md.
 
 import { spawnSync } from 'node:child_process';
-import { cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { appendFileSync, cpSync, existsSync, mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -98,6 +101,31 @@ function gameEnv(game, siteForGame) {
 
 const escapeHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+
+// ---------- The Home / "Back to start" bar ----------
+const barDir = join(root, 'scripts', 'game-bar');
+const barHash = createHash('sha256').update(readFileSync(join(barDir, 'playbase-bar.js'))).update(readFileSync(join(barDir, 'playbase-bar.css'))).digest('hex').slice(0, 12);
+
+// Adds the bar's stylesheet and script to a game's front page (index.html). The game's own checks have already run.
+function addBar(game, gameDist) {
+  const file = join(gameDist, 'index.html');
+  let html = readFileSync(file, 'utf8');
+  if (html.includes('playbase-bar')) return;
+  const hasHead = /<\/head>/i.test(html);
+  const hasBody = /<\/body>/i.test(html);
+  if (!hasHead || !hasBody) throw new Error('index.html needs both </head> and </body> so the Home bar can be added (or set "bar": false in game.json)');
+  html = html
+    .replace(/<\/head>/i, `<link rel="stylesheet" href="../../playbase-bar.css">\n</head>`)
+    .replace(/<\/body>/i, `<script src="../../playbase-bar.js" data-title="${escapeHtml(game.title)}" defer></script>\n</body>`);
+  writeFileSync(file, html);
+  // The page changed after the game was built, so a phone that already saved the old page would keep showing it.
+  // Changing the offline worker's file makes browsers reinstall it, which refreshes the saved pages.
+  for (const name of ['sw.js', 'service-worker.js']) {
+    const worker = join(gameDist, name);
+    if (existsSync(worker)) appendFileSync(worker, `\n// playbase-bar ${barHash}\n`);
+  }
+}
+
 // ---------- Build ----------
 rmSync(dist, { recursive: true, force: true });
 mkdirSync(join(dist, 'games'), { recursive: true });
@@ -118,6 +146,7 @@ for (const game of selected) {
     const out = join(dir, game.build.output);
     if (!existsSync(join(out, 'index.html'))) throw new Error(`the build did not produce ${game.build.output}/index.html`);
     if (!skipChecks) for (const check of game.build.checks ?? []) run(check, dir, env);
+    if (game.bar !== false) addBar(game, out);
     cpSync(out, join(dist, 'games', game.id), { recursive: true });
     const ext = extname(game.cover);
     cpSync(join(dir, game.cover), join(dist, 'covers', `${game.id}${ext}`));
@@ -135,6 +164,8 @@ if (failed.length) {
 
 // ---------- The hub page ----------
 cpSync(join(root, 'hub'), dist, { recursive: true });
+cpSync(join(barDir, 'playbase-bar.js'), join(dist, 'playbase-bar.js'));
+cpSync(join(barDir, 'playbase-bar.css'), join(dist, 'playbase-bar.css'));
 
 const catalogue = built
   .map(({ game, cover }) => ({
